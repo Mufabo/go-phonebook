@@ -5,3 +5,13 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 )
+
+func (app *application) routes() *httprouter.Router {
+	router := httprouter.New()
+
+	router.HandlerFunc(http.MethodGet, "/api/v1/healthz", app.healthzHandler)
+	router.HandlerFunc(http.MethodPost, "/api/v1/persons", app.createPersonHandler)
+	router.HandlerFunc(http.MethodGet, "/api/v1/persons/:id", app.showPersonsHandler)
+
+	return router
+}
