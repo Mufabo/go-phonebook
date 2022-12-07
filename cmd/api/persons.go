@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"net/http"
+
+	"mufabo.github.io/go-phonebook/internal/data"
 )
 
 func (app *application) createPersonHandler(w http.ResponseWriter, r *http.Request) {
@@ -17,5 +19,15 @@ func (app *application) showPersonsHandler(w http.ResponseWriter, r *http.Reques
 		return
 	}
 
-	fmt.Fprintf(w, "show details of single person %d\n", id)
+	person := data.Person{
+		ID: id,
+		Name: "Harry",
+		Number: 1234,
+	}
+
+	err = app.writeJSON(w, http.StatusOK, person, nil)
+	if err != nil {
+		app.logger.Print(err)
+		http.Error(w, "Server error", http.StatusInternalServerError)
+	}
 }
