@@ -11,6 +11,9 @@ content-type: application/json
 http://localhost:4000/api/v1/persons/0
 
 ###
+http://localhost:4000/api/v1/persons/5345
+
+###
 POST http://localhost:4000/api/v1/healthz HTTP/1.1
 content-type: application/json
 
@@ -19,3 +22,6 @@ content-type: application/json
 ###
 
 OPTIONS  http://localhost:4000/api/v1/healthz HTTP/1.1
+
+###
+http://localhost:4000/foo

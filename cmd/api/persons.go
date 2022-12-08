@@ -15,7 +15,7 @@ func (app *application) showPersonsHandler(w http.ResponseWriter, r *http.Reques
 
 	id, err := app.readIdParam(r)
 	if  err != nil || id < 1 {
-		http.NotFound(w, r)
+		app.notFoundResponse(w, r)
 		return
 	}
 
@@ -25,9 +25,8 @@ func (app *application) showPersonsHandler(w http.ResponseWriter, r *http.Reques
 		Number: 1234,
 	}
 
-	err = app.writeJSON(w, http.StatusOK, person, nil)
+	err = app.writeJSON(w, http.StatusOK, envelope{"person":person}, nil)
 	if err != nil {
-		app.logger.Print(err)
-		http.Error(w, "Server error", http.StatusInternalServerError)
+		app.serverErrorResponse(w, r, err)
 	}
 }
