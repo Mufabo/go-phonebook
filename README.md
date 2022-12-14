@@ -1,6 +1,6 @@
 # Phonebook GoLang REST API
 
-This is a simple REST API written in GoLang and deployed with Google Cloud Run for learning purposes.
+This is a simple REST API written in GoLang for learning purposes.
 
 
 | Methods | Endpoints           | Action                             |

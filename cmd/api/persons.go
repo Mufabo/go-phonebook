@@ -8,7 +8,19 @@ import (
 )
 
 func (app *application) createPersonHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "this will create a new Person")
+	var input struct {
+		Name string `json:"name"`
+		Number int32 `json:"number"`
+	}
+
+	err := app.readJSON(w, r, &input)
+	if err != nil {
+		app.badRequestResponse(w, r, err)
+		return
+	}
+
+	// Dump the contents of the input struct in a HTTP response.
+    fmt.Fprintf(w, "%+v\n", input)
 }
 
 func (app *application) showPersonsHandler(w http.ResponseWriter, r *http.Request) {

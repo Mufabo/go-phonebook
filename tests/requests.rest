@@ -1,0 +1,58 @@
+http://localhost:4000/api/v1/healthz
+
+###
+
+POST http://localhost:4000/api/v1/persons HTTP/1.1
+content-type: application/json
+
+{"name":"Fatih", "number": 1234}
+
+###
+http://localhost:4000/api/v1/persons/0
+
+###
+http://localhost:4000/api/v1/persons/5345
+
+###
+POST http://localhost:4000/api/v1/healthz HTTP/1.1
+content-type: application/json
+
+{}
+
+###
+
+OPTIONS  http://localhost:4000/api/v1/healthz HTTP/1.1
+
+###
+http://localhost:4000/foo
+
+### unknown fields
+POST http://localhost:4000/api/v1/persons HTTP/1.1
+content-type: application/json
+
+{"name":"Fatih", "number": 1234, "dfsf": 333}
+
+### Body contains multiple JSON values
+POST http://localhost:4000/api/v1/persons HTTP/1.1
+content-type: application/json
+
+{"name":"Fatih", "number": 1234}
+{"name":"Fat", "number": 23}
+
+### Body contains garbage content after the first JSON value
+POST http://localhost:4000/api/v1/persons HTTP/1.1
+content-type: application/json
+
+:~()
+
+### Request body too large
+POST http://localhost:4000/api/v1/persons HTTP/1.1
+content-type: application/json
+
+< ./largefile.json
+
+### Number with Country Code
+POST http://localhost:4000/api/v1/persons HTTP/1.1
+content-type: application/json
+
+{"name":"Fatih", "number": +491234}
